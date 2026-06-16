@@ -6,7 +6,7 @@ To run this project locally, please follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/luk3pigg/pokemon_explorer_app.git](https://github.com/luk3pigg/pokemon_explorer_app.git)
+   git clone https://github.com/luk3pigg/pokemon_explorer_app
    ```
 
 2. **Install dependencies:**
