@@ -3,10 +3,27 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface Pokemon {
   name: string;
   url: string;
+}
+
+interface PokemonDetails {
+  name: string;
+  height: number;
+  weight: number;
+  sprites: {
+    front_default: string;
+  };
 }
 
 export default function Home() {
@@ -15,6 +32,9 @@ export default function Home() {
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [prevUrl, setPrevUrl] = useState<string | null>(null);
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
+
   const fetchPokemon = async (urlToFetch: string) => {
     const res = await fetch(urlToFetch);
     const data = await res.json();
@@ -22,6 +42,14 @@ export default function Home() {
     setPokemonList(data.results);
     setNextUrl(data.next);
     setPrevUrl(data.previous);
+  };
+
+  const fetchPokemonDetails = async (url: string) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    setSelectedPokemon(data); // 1. Save the fetched data to our bucket
+    setIsDialogOpen(true);    // 2. Open the modal ONLY after the data is ready
   };
 
   useEffect(() => {
