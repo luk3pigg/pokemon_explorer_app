@@ -61,7 +61,9 @@ export default function Home() {
       <h1>Pokémon Browser</h1>
       <h2>Search and find Pokémon</h2>
       {pokemonList.map((pokemon, index) => (
-          <Card key={index}>
+          <Card key={index}
+          onClick={() => fetchPokemonDetails(pokemon.url)}
+          >
             <CardHeader>
               <CardTitle>{pokemon.name}</CardTitle>
             </CardHeader>
@@ -80,6 +82,27 @@ export default function Home() {
         >
           Next
         </Button>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          {selectedPokemon && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{selectedPokemon.name}</DialogTitle>
+              </DialogHeader>
+              
+              <div>
+                <img 
+                  src={selectedPokemon.sprites.front_default} 
+                  alt={selectedPokemon.name} 
+                />
+                <p>Height: {selectedPokemon.height}</p>
+                <p>Weight: {selectedPokemon.weight}</p>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
 
       <footer>Thank you for using Pokémon Browser!</footer>
