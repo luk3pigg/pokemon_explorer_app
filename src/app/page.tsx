@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface Pokemon {
   name: string;
@@ -38,6 +39,21 @@ export default function Home() {
             </CardHeader>
           </Card>
         ))}
+      <Button 
+          onClick={() => prevUrl && fetchPokemon(prevUrl)}
+          disabled={!prevUrl}
+        >
+          Back
+        </Button>
+        
+        <Button 
+          onClick={() => nextUrl && fetchPokemon(nextUrl)}
+          disabled={!nextUrl}
+        >
+          Next
+        </Button>
+
+
       <footer>Thank you for using Pokémon Browser!</footer>
     </main>
   );
