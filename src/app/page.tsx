@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
 
@@ -12,8 +12,15 @@ export default function Home() {
     const url = 'https://pokeapi.co/api/v2/pokemon';
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
+    
+    setPokemonList(data.results);
+    setNextUrl(data.next);
+    setPrevUrl(data.previous);
   };
+
+  useEffect(() => {
+    testFetch();
+  }, []);
 
   return (
     <main className="p-8">
