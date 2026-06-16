@@ -50,8 +50,22 @@ export default function Home() {
 
   return (
     <main className="p-8">
-      <h1>Pokémon Browser</h1>
-      <h2>Search and find Pokémon</h2>
+      <div className="flex flex-col items-center text-center space-y-4 mb-8">
+        <h1 className="text-[60px] font-semibold leading-[78px] text-[#181A1B] tracking-tight">
+          Pokémon Browser
+        </h1>
+        <h2 className="text-[30px] font-semibold leading-[36px] tracking-[-0.025em] text-[#71717A]">
+          Search and find Pokémon
+        </h2>
+      </div>
+
+      <hr className="w-full border-t border-[#E4E4E7] my-8" />
+
+      <div className="mb-6">
+        <h3 className="text-[30px] font-semibold leading-[36px] tracking-[-0.025em] text-[#09090B]">
+          Explore Pokémon
+        </h3>
+      </div>
       
       <div> {pokemonList.map((pokemon, index) => (
           <PokemonCard 
