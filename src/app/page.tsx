@@ -67,28 +67,33 @@ export default function Home() {
         </h3>
       </div>
       
-      <div> {pokemonList.map((pokemon, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        {pokemonList.map((pokemon, index) => (
           <PokemonCard 
             key={index}
             pokemon={pokemon}
             onClick={() => fetchPokemonDetails(pokemon.url)}
           />
         ))}
-        </div>
-          
-      <Button 
+      </div>
+      
+      <div className="flex justify-center items-center gap-4 mt-8 mb-16 w-full max-w-[1160px] mx-auto h-[36px]">
+        <Button 
           onClick={() => prevUrl && fetchPokemon(prevUrl)}
           disabled={!prevUrl}
+          className="text-[14px] font-medium leading-[20px]"
         >
-          Back
+          &larr; Back
         </Button>
         
         <Button 
           onClick={() => nextUrl && fetchPokemon(nextUrl)}
           disabled={!nextUrl}
+          className="text-[14px] font-medium leading-[20px]"
         >
-          Next
+          Next &rarr;
         </Button>
+      </div>
 
       <PokemonDetailsDialog 
         isDialogOpen={isDialogOpen} 
@@ -96,8 +101,11 @@ export default function Home() {
         selectedPokemon={selectedPokemon} 
       />
 
+      <hr className="w-full border-t border-[#E4E4E7] my-8" />
 
-      <footer>Thank you for using Pokémon Browser!</footer>
+      <footer className="w-full text-center text-[18px] font-semibold leading-[28px] text-[#181A1B] py-8">
+        Thank you for using Pokémon Browser!
+      </footer>
     </main>
   );
 }
