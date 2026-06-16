@@ -3,11 +3,16 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
 export default function Home() {
 
-  const [pokemonList, setPokemonList] = useState([]);
-  const [nextUrl, setNextUrl] = useState(null);
-  const [prevUrl, setPrevUrl] = useState(null);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [nextUrl, setNextUrl] = useState<string | null>(null);
+  const [prevUrl, setPrevUrl] = useState<string | null>(null);
 
   const testFetch = async () => {
     const url = 'https://pokeapi.co/api/v2/pokemon';
@@ -26,6 +31,7 @@ export default function Home() {
   return (
     <main className="p-8">
       <h1>Pokémon Browser</h1>
+      <h2>Search and find Pokémon</h2>
       {pokemonList.map((pokemon, index) => (
           <Card key={index}>
             <CardHeader>
@@ -33,6 +39,7 @@ export default function Home() {
             </CardHeader>
           </Card>
         ))}
+      <footer>Thank you for using Pokémon Browser!</footer>
     </main>
   );
 }
