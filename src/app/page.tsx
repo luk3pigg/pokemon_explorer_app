@@ -24,8 +24,16 @@ export default function Home() {
 
   return (
     <main className="p-8">
-      <h1>Luke's Pokémon App</h1>
+      <h1>Pokémon Browser</h1>
+      <ul>
+        {pokemonList.map((pokemon, index) => (
+          <li key={index}>{pokemon.name}</li>
+        ))}
+      </ul>
+      
     </main>
   );
 }
+
+
 
