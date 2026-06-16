@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
 
@@ -25,12 +26,13 @@ export default function Home() {
   return (
     <main className="p-8">
       <h1>Pokémon Browser</h1>
-      <ul>
-        {pokemonList.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}</li>
+      {pokemonList.map((pokemon, index) => (
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{pokemon.name}</CardTitle>
+            </CardHeader>
+          </Card>
         ))}
-      </ul>
-      
     </main>
   );
 }
