@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog"
+import PokemonCard from '@/components/pokemonCard';
 
 interface Pokemon {
   name: string;
@@ -57,15 +57,15 @@ export default function Home() {
     <main className="p-8">
       <h1>Pokémon Browser</h1>
       <h2>Search and find Pokémon</h2>
-      {pokemonList.map((pokemon, index) => (
-          <Card key={index}
-          onClick={() => fetchPokemonDetails(pokemon.url)}
-          >
-            <CardHeader>
-              <CardTitle>{pokemon.name}</CardTitle>
-            </CardHeader>
-          </Card>
+      <div> {pokemonList.map((pokemon, index) => (
+          <PokemonCard 
+            key={index}
+            pokemon={pokemon}
+            onClick={() => fetchPokemonDetails(pokemon.url)}
+          />
         ))}
+        </div>
+          
       <Button 
           onClick={() => prevUrl && fetchPokemon(prevUrl)}
           disabled={!prevUrl}
