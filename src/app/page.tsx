@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTitle
 } from "@/components/ui/dialog"
 
 interface Pokemon {
@@ -47,10 +45,9 @@ export default function Home() {
   const fetchPokemonDetails = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
-    
-    setSelectedPokemon(data); // 1. Save the fetched data to our bucket
-    setIsDialogOpen(true);    // 2. Open the modal ONLY after the data is ready
-  };
+    setSelectedPokemon(data);
+    setIsDialogOpen(true);
+};
 
   useEffect(() => {
     fetchPokemon('https://pokeapi.co/api/v2/pokemon?limit=12&offset=0');
