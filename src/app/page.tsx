@@ -2,13 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle
-} from "@/components/ui/dialog"
 import PokemonCard from '@/components/pokemonCard';
+import PokemonDetailsDialog from '@/components/pokemonDetailsDialog';
 
 interface Pokemon {
   name: string;
@@ -57,6 +52,7 @@ export default function Home() {
     <main className="p-8">
       <h1>Pokémon Browser</h1>
       <h2>Search and find Pokémon</h2>
+      
       <div> {pokemonList.map((pokemon, index) => (
           <PokemonCard 
             key={index}
@@ -80,26 +76,11 @@ export default function Home() {
           Next
         </Button>
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          {selectedPokemon && (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedPokemon.name}</DialogTitle>
-              </DialogHeader>
-              
-              <div>
-                <img 
-                  src={selectedPokemon.sprites.front_default} 
-                  alt={selectedPokemon.name} 
-                />
-                <p>Height: {selectedPokemon.height}</p>
-                <p>Weight: {selectedPokemon.weight}</p>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+      <PokemonDetailsDialog 
+        isDialogOpen={isDialogOpen} 
+        setIsDialogOpen={setIsDialogOpen} 
+        selectedPokemon={selectedPokemon} 
+      />
 
 
       <footer>Thank you for using Pokémon Browser!</footer>
