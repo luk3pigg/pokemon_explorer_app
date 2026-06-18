@@ -12,6 +12,7 @@ interface Pokemon {
 
 interface PokemonDetails {
   name: string;
+  id: number;
   height: number;
   weight: number;
   sprites: {
@@ -28,8 +29,8 @@ export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
 
-  const fetchPokemon = async (urlToFetch: string) => {
-    const res = await fetch(urlToFetch);
+  const fetchPokemon = async (url: string) => {
+    const res = await fetch(url);
     const data = await res.json();
     
     setPokemonList(data.results);
