@@ -26,7 +26,7 @@ To run this project locally, please follow these steps:
 
 ## 2. Design and Component Decisions
 
-I attempted to reproduce the provided Figma UI design by breaking it down into modular React components. The `Home` component acts as the parent orchestrator, handling data fetching and state. It passes data down to the child components `PokemonCard` and `PokemonDetailsDialog` via props, which provide the logic for the Pokemon cards and the dialog boxes respectively. 
+I attempted to reproduce the provided Figma UI design by breaking it down into modular React components. The `Home` component acts as the parent orchestrator, handling data fetching and state. It passes data down to the child components `PokemonCard` and `PokemonDetailsDialog` via props, which provide the logic and UI for the Pokemon cards and the dialog boxes respectively. 
 I used shadcn/ui's `<Button>`, `<Card>`, and `<Dialog>` components because they provided convenient, built in structures for my pagination buttons and pokemon cards. My main interpretation/deviation from the Figma design was the use of a `<Dialog>` modal for the detailed view rather than routing the user to a separate Next.js page. I chose this approach because it allows the user to quickly inspect a Pokemon's stats without losing their current page. I avoided the overhead of setting up dynamic URL routing to invest time into other areas of the project. The disadvantages of this method were that the URL in the browser does not change, so it is hard to bookmark and compare stats between different Pokemon. 
 
 ## 3.	State Management Approach
