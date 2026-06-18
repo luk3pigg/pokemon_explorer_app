@@ -1,14 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle
-} from "@/components/ui/dialog"
+import PokemonCard from '@/components/pokemonCard';
+import PokemonDetailsDialog from '@/components/pokemonDetailsDialog';
 
 interface Pokemon {
   name: string;
@@ -17,6 +12,7 @@ interface Pokemon {
 
 interface PokemonDetails {
   name: string;
+  id: number;
   height: number;
   weight: number;
   sprites: {
@@ -33,8 +29,8 @@ export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
 
-  const fetchPokemon = async (urlToFetch: string) => {
-    const res = await fetch(urlToFetch);
+  const fetchPokemon = async (url: string) => {
+    const res = await fetch(url);
     const data = await res.json();
     
     setPokemonList(data.results);
@@ -55,54 +51,62 @@ export default function Home() {
 
   return (
     <main className="p-8">
-      <h1>Pokémon Browser</h1>
-      <h2>Search and find Pokémon</h2>
-      {pokemonList.map((pokemon, index) => (
-          <Card key={index}
-          onClick={() => fetchPokemonDetails(pokemon.url)}
-          >
-            <CardHeader>
-              <CardTitle>{pokemon.name}</CardTitle>
-            </CardHeader>
-          </Card>
+      <div className="flex flex-col items-center text-center space-y-4 mb-8">
+        <h1 className="text-[60px] font-semibold leading-[78px] text-[#181A1B] tracking-tight">
+          Pokémon Browser
+        </h1>
+        <h2 className="text-[30px] font-semibold leading-[36px] tracking-[-0.025em] text-[#71717A]">
+          Search and find Pokémon
+        </h2>
+      </div>
+
+      <hr className="w-full border-t border-[#E4E4E7] my-8" />
+
+      <div className="mb-6">
+        <h3 className="text-[30px] font-semibold leading-[36px] tracking-[-0.025em] text-[#09090B]">
+          Explore Pokémon
+        </h3>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        {pokemonList.map((pokemon, index) => (
+          <PokemonCard 
+            key={index}
+            pokemon={pokemon}
+            onClick={() => fetchPokemonDetails(pokemon.url)}
+          />
         ))}
-      <Button 
+      </div>
+      
+      <div className="flex justify-center items-center gap-4 mt-8 mb-16 w-full max-w-[1160px] mx-auto h-[36px]">
+        <Button 
           onClick={() => prevUrl && fetchPokemon(prevUrl)}
           disabled={!prevUrl}
+          className="text-[14px] font-medium leading-[20px]"
         >
-          Back
+          &larr; Back
         </Button>
         
         <Button 
           onClick={() => nextUrl && fetchPokemon(nextUrl)}
           disabled={!nextUrl}
+          className="text-[14px] font-medium leading-[20px]"
         >
-          Next
+          Next &rarr;
         </Button>
+      </div>
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          {selectedPokemon && (
-            <>
-              <DialogHeader>
-                <DialogTitle>{selectedPokemon.name}</DialogTitle>
-              </DialogHeader>
-              
-              <div>
-                <img 
-                  src={selectedPokemon.sprites.front_default} 
-                  alt={selectedPokemon.name} 
-                />
-                <p>Height: {selectedPokemon.height}</p>
-                <p>Weight: {selectedPokemon.weight}</p>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
+      <PokemonDetailsDialog 
+        isDialogOpen={isDialogOpen} 
+        setIsDialogOpen={setIsDialogOpen} 
+        selectedPokemon={selectedPokemon} 
+      />
 
+      <hr className="w-full border-t border-[#E4E4E7] my-8" />
 
-      <footer>Thank you for using Pokémon Browser!</footer>
+      <footer className="w-full text-center text-[18px] font-semibold leading-[28px] text-[#181A1B] py-8">
+        Thank you for using Pokémon Browser!
+      </footer>
     </main>
   );
 }
